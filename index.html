@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Flower Fall</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #fff0f5, #ffd9eb);
+        position: relative;
+    }
+
+    .flower {
+        position: absolute;
+        width: 30px;
+        height: auto;
+        animation: fall linear infinite, rotate linear infinite;
+        opacity: 0.7;
+    }
+
+    .main-flower {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        z-index: 2;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes fall {
+        0% {
+            top: -10%;
+            transform: translateX(0) rotate(0deg);
+        }
+        100% {
+            top: 110%;
+            transform: translateX(100px) rotate(360deg);
+        }
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translate(-50%, -55%); }
+        50% { transform: translate(-50%, -45%); }
+    }
+</style>
+<body>
+    <img src="./main-flower.png" class="main-flower" alt="Main Flower">
+    
+    <script>
+        function createFlowers() {
+            const flowers = ['./flower-1.png', './flower-2.png', './flower-3.png'];
+            const numberOfFlowers = 30; // Adjust number of falling flowers
+            
+            for (let i = 0; i < numberOfFlowers; i++) {
+                const flower = document.createElement('img');
+                flower.className = 'flower';
+                flower.src = flowers[Math.floor(Math.random() * flowers.length)];
+                
+                // Random animation properties
+                flower.style.top = '-50px'
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.animationDelay = Math.random() * 10 + 's';
+                flower.style.animationDuration = 5 + Math.random() * 10 + 's';
+                flower.style.width = 20 + Math.random() * 20 + 'px';
+                flower.style.filter = `brightness(${0.8 + Math.random() * 0.5})`;
+                
+                document.body.appendChild(flower);
+            }
+        }
+
+        createFlowers();
+    </script>
+</body>
+</html>
